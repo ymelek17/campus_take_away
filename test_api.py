@@ -21,11 +21,13 @@ class User(Resource):
 
     def get(self, username):
         # check whether the provided user is in firebase, if not break
+        return {'message': 'API is working'}
         data = request.get_json()   # the data that frontend sends
         # send the user information
         pass    # 200 for successfully returned to get request
 
     def post(self, username):
+        return {'message': 'API is working'}
         # check whether the provided user already exists
         data = User.parser.parse_args()   # the data that frontend sends
         # create a new user on firebase with data
@@ -33,6 +35,7 @@ class User(Resource):
         return {'message': 'User Successfully Created'}
 
     def delete(self, username):
+        return {'message': 'API is working'}
         # check whether the provided user is in firebase, if not break
         data = request.get_json()  # the data that frontend sends
         # delete the user on firebase
@@ -41,3 +44,4 @@ class User(Resource):
 
 
 api.add_resource(User, '/user/<string:username>')
+app.run()
