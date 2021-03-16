@@ -23,6 +23,13 @@ json = {"phoneNumber":11112222333,
         "type":"student",
         "lastName":"SURNAME"}
 
+json2 = {"email":"deparis@deparis.com",
+         "password":"98765",
+         "type":"cafeteria",
+         "name":"DeParis",
+         "university":"Koc",
+         "phoneNumber":44445555666}
+
 def signup(json_info): #for Students/Staff
     email = json_info['email']
     password = json_info['password']
@@ -36,6 +43,24 @@ def signup(json_info): #for Students/Staff
 
     data = {'email': email, 'password': password, 'first name':firstName, 'last name':lastName, 'university':university,
             'date of birth':dateOfBirth, 'phone number':phoneNumber, 'type':type}
+
+    try:
+        auth.create_user_with_email_and_password(email, password)
+        create(data)
+        print('success')
+    except:
+        print('User already exists!')
+
+
+def signup_service(json_info): #for Services
+    email = json_info['email']
+    password = json_info['password']
+    type = json_info['type']
+    name = json_info['name']
+    university = json_info['university']
+    phoneNumber = json_info['phoneNumber']
+
+    data = {'email':email, 'password':password, 'name':name, 'type':type, 'university':university, 'phone number':phoneNumber}
     
     try:
         auth.create_user_with_email_and_password(email, password)
@@ -43,6 +68,9 @@ def signup(json_info): #for Students/Staff
         print('success')
     except:
         print('User already exists!')
+
+
+
 
 def login(email, password):
     try:
