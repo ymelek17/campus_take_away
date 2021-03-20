@@ -68,6 +68,24 @@ def signup_service(json_info): #for Services
         print('success')
     except:
         print('User already exists!')
+        
+def signup_service(json_info): # for Services
+    email = json_info['email']
+    password = json_info['password']
+    type = json_info['type']
+    name = json_info['name']
+    university = json_info['university']
+    phoneNumber = json_info['phoneNumber']
+
+    data = {'email': email, 'password': password, 'type': type, 'name': name,
+            'university': university, 'phone number': phoneNumber}
+
+    try:
+        auth.create_user_with_email_and_password(email, password)
+        #create(data)
+        print('success')
+    except:
+        print('User already exists!')
 
 
 
