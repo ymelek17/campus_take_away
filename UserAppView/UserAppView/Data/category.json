@@ -1,0 +1,32 @@
+[
+  {
+    "id" : 1,
+    "name" : "Restaurants",
+    "image" : ""
+  },
+  {
+    "id" : 2,
+    "name" : "Favorites",
+    "image" : ""
+  },
+  {
+    "id" : 3,
+    "name" : "Reorder",
+    "image" : ""
+  },
+  {
+    "id" : 4,
+    "name" : "Most Liked",
+    "image" : ""
+  },
+  {
+    "id" : 5,
+    "name" : "New in",
+    "image" : ""
+  },
+  {
+    "id" : 6,
+    "name" : "*****",
+    "image" : ""
+  }
+]
