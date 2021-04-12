@@ -114,35 +114,35 @@ def get_all_services(university):
 ## Work Package 2: Menu and Basket ##
 
 json3 = {"product_id": "NEROFK1",
-         "name": "Filter Coffee",
+         "product_name": "Filter Coffee",
          "price": 8.0,
          "product_description": "Fresh Filter Coffee",
          "additional_notes": "No-Milk"}
 json4 = {"product_id": "NEROFK2",
-         "name": "Filter Coffee with Milk",
+         "product_name": "Filter Coffee with Milk",
          "price": 10.0,
          "product_description": "Fresh Filter Coffee with Milk",
          "additional_notes": "Soy-Milk"}
 
 #Menu
 def add_to_menu(json, username):
-    db.child('Users').child('Services').child(username).child('Menu').child(json['name']).set(json)
+    db.child('Users').child('Services').child(username).child('Menu').child(json['product_name']).set(json)
 
 def get_menu(username):
     return db.child('Users').child('Services').child(username).child('Menu').get().val()
 
-def remove_from_menu(name, username):
-    db.child('Users').child('Services').child(username).child('Menu').child(name).remove()
+def remove_from_menu(product_name, username):
+    db.child('Users').child('Services').child(username).child('Menu').child(product_name).remove()
 
 #Basket
 def add_to_basket(json, username):
-    db.child('Users').child('Customers').child(username).child('Basket').child(json['name']).set(json)
+    db.child('Users').child('Customers').child(username).child('Basket').child(json['product_name']).set(json)
 
 def get_basket(username):
     return db.child('Users').child('Customers').child(username).child('Basket').get().val()
 
-def drop_from_basket(name, username):
-    db.child('Users').child('Customers').child(username).child('Basket').child(name).remove()
+def drop_from_basket(product_name, username):
+    db.child('Users').child('Customers').child(username).child('Basket').child(product_name).remove()
 
 def empty_basket(username): #call after empty_basket/payment_complete/new_provider
     db.child('Users').child('Customers').child(username).child('Basket').remove()
