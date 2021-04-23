@@ -27,6 +27,7 @@ json = {"username": "aratello",
         "gender": 'female',
         "date_of_birth": "11.03.1998"}
 
+
 def signup_customer(json_info):
     username = json_info['username']
     phone_number = json_info['phone_number']
@@ -46,19 +47,22 @@ def signup_customer(json_info):
     try:
         auth.create_user_with_email_and_password(email, password)
         create_customer(data)
-        print('success')
+        return {'message': 'User Successfully Created', 'username': username}, 201
     except:
-        print('User already exists!')
+        return {'message': 'User Creation Failed', 'username': 'FAIL'}, 401
+
 
 def create_customer(data):
     db.child('Users').child('Customers').child(data['username']).set(data)
+
 
 json2 = {"company_name":"DeParis",
          "email":"egeparis@deparis.com",
          "password":"9876576",
          "phone_number": "123123123",
          "location_info": "Koc University SNA-1",
-         "university": "Koc University"}
+         "university": "KocUniversity"}
+
 
 def signup_service(json_info):
     email = json_info['email']
@@ -68,33 +72,42 @@ def signup_service(json_info):
     phone_number = json_info['phone_number']
     university = json_info['university']
 
-    data = {'email': email, 'password': password,'company_name': company_name,
-            'location_info': location_info, 'phone number': phone_number, 'university': university}
+    data = {'email': email, 'password': password, 'company_name': company_name,
+            'location_info': location_info, 'phone_number': phone_number, 'university': university}
 
     auth = firebase.auth()
 
     try:
         auth.create_user_with_email_and_password(email, password)
         create_service(data)
-        print('success')
+        return {'message': 'Cafe Successfully Created', 'Company Name': company_name}, 202
     except:
-        print('User already exists!')
+        return {'message': 'Cafe Creation Failed', 'Company Name': 'FAIL'}, 402
+
 
 def create_service(data):
     db.child('Users').child('Services').child(data['company_name']).set(data)
 
+
 def login(email, password):
     try:
         auth.sign_in_with_email_and_password(email, password)
-        print('success')
+        return {'message': 'Authetication Successful'}, 203
     except:
-        print('Invalid mail or password.')
+        return {'message': 'Authetication Failed'}, 403
+
 
 def update(username, attribute, newval):
     db.child('Users').child('Customers').child(username).update({attribute: newval})
 
+
+def update(username, attribute, newval):
+    db.child('Users').child('Services').child(username).update({attribute: newval})
+
+
 def delete_user(username):
     db.child('Users').child('Customers').child(username).remove()
+
 
 def get_user_by_username(username):
     people = db.child('Users').child('Customers').get()
@@ -102,16 +115,20 @@ def get_user_by_username(username):
         if p.key() == username:
             return p.val()
 
+
 def get_all_services(university):
     dict1 = dict()
     services = db.child('Users').child('Services').get()
+    count = 0
+    dict1[count] = 'No Cafes found for ' + university
     for cafe in services.each():
         if cafe.val()['university'] == university:
-            dict1[cafe.key()] = cafe.val()
+            dict1[count] = cafe.val()
+            count = count + 1
     return dict1
 
 
-## Work Package 2: Menu and Basket ##
+# Work Package 2: Menu and Basket ##
 
 json3 = {"product_id": "NEROFK1",
          "name": "Filter Coffee",
@@ -124,28 +141,50 @@ json4 = {"product_id": "NEROFK2",
          "product_description": "Fresh Filter Coffee with Milk",
          "additional_notes": "Soy-Milk"}
 
+
 #Menu
 def add_to_menu(json, username):
-    db.child('Users').child('Services').child(username).child('Menu').child(json['name']).set(json)
+    db.child('Users').child('Services').child(username).child('Menu').child(json['product_name']).set(json)
+
 
 def get_menu(username):
-    return db.child('Users').child('Services').child(username).child('Menu').get().val()
+    js = db.child('Users').child('Services').child(username).child('Menu').get()
+    dict1 = dict()
+    count = 0
+    dict1[count] = 'Empty'
+    for j in js.each():
+        dict1[count] = j.val()
+        count = count + 1
+    return dict1
+
 
 def remove_from_menu(name, username):
     db.child('Users').child('Services').child(username).child('Menu').child(name).remove()
 
+
 #Basket
 def add_to_basket(json, username):
-    db.child('Users').child('Customers').child(username).child('Basket').child(json['name']).set(json)
+    db.child('Users').child('Customers').child(username).child('Basket').child(json['product_name']).set(json)
+
 
 def get_basket(username):
-    return db.child('Users').child('Customers').child(username).child('Basket').get().val()
+    js = db.child('Users').child('Customers').child(username).child('Basket').get()
+    dict1 = dict()
+    count = 0
+    dict1[count] = 'Empty'
+    for j in js.each():
+        dict1[count] = j.val()
+        count = count + 1
+    return dict1
+
 
 def drop_from_basket(name, username):
     db.child('Users').child('Customers').child(username).child('Basket').child(name).remove()
 
-def empty_basket(username): #call after empty_basket/payment_complete/new_provider
+
+def empty_basket(username): # call after empty_basket/payment_complete/new_provider
     db.child('Users').child('Customers').child(username).child('Basket').remove()
+
 
 def calculate_total(username):
     total = 0.0
@@ -155,7 +194,7 @@ def calculate_total(username):
     return total
 
 
-## Work Package 3: Timeslots & Tracking ##
+# Work Package 3: Timeslots & Tracking ##
 
 def define_timeslots(username, opening_hour, closing_hour, limit):
     number_of_timeslots = (closing_hour - opening_hour) * 2
@@ -166,32 +205,59 @@ def define_timeslots(username, opening_hour, closing_hour, limit):
 
     db.child('Users').child('Services').child(username).child('Timeslots').set(data)
 
+
 def decrease_availabile_slot(username, index):
     remaining = 0
     timeslots = db.child('Users').child('Services').child(username).child('Timeslots').get()
 
     for t in timeslots.each():
         if t.key() == "timeslot" + str(index):
-            remaining = t.val()
+            remaining = int(t.val())
     newval = remaining - 1
 
     if newval >= 0:
       db.child('Users').child('Services').child(username).child('Timeslots').update({"timeslot" + str(index): newval})
 
+
 def add_to_active_orders(company, username, timeslot):
-    basket = get_basket(username)
+    basket = db.child('Users').child('Customers').child(username).child('Basket').get().val()
     db.child('Users').child('Services').child(company).child('Active Orders').child(username).set(basket)
-    order_id = company + ": " + str(timeslot)
-    db.child('Users').child('Customers').child(username).child('Pending Orders').child(order_id).set(basket)
+    db.child('Users').child('Customers').child(username).child('Pending Orders').child(company).set(basket)
     decrease_availabile_slot(company, timeslot)
+    empty_basket(username)
     #send_new_order_notification()
 
-def get_active_orders(company):
-    return db.child('Users').child('Services').child(company).child('Active Orders').get().val()
+
+def get_active_orders_cafe(company):
+    js = db.child('Users').child('Services').child(company).child('Active Orders').get()
+    dict1 = dict()
+    count = 0
+    dict1[count] = 'Empty'
+    for j in js.each():
+        dict1[count] = j.val()
+        count = count + 1
+    return dict1
+
+
+def get_active_orders_user(username):
+    js = db.child('Users').child('Customers').child(username).child('Pending Orders').get()
+    dict1 = dict()
+    count = 0
+    dict1[count] = 'Empty'
+    for j in js.each():
+        dict1[count] = j.val()
+        count = count + 1
+    return dict1
+
 
 def order_ready(company, username):
+    order = get_active_orders_user(username)
     db.child('Users').child('Services').child(company).child('Active Orders').child(username).remove()
+    db.child('Users').child('Customers').child(username).child('Pending Orders').child(company).remove()
+    db.child('Users').child('Customers').child(username).child('Order History').child(company).set(order)
+    return order
     #send_ready_notification()
+
 
 ############# TESTS #############
 #signup_customer(json)
