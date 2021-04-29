@@ -1,0 +1,26 @@
+[
+{
+    "product_id":"112233",
+    "product_description":"Espresso with steamed milk.",
+    "price":"15",
+    "product_name":"Cappuccino",
+    
+},
+
+{
+    "product_id":"112234",
+    "product_description":"Filter",
+    "price":"10",
+    "product_name":"Filter",
+    
+},
+
+{
+    "product_id":"112235",
+    "product_description":"Cake",
+    "price":"30",
+    "product_name":"Cake",
+    
+}
+
+]
