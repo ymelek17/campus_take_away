@@ -57,7 +57,7 @@ struct BasketView: View {
             //MARK: Header
             Text("My Basket").font(.largeTitle)
                 .foregroundColor(Color("DarkBlue"))
-                .fontWeight(.black)
+                .fontWeight(.medium)
                 .font(.system(.title, design: .serif))
                 .padding()
             
@@ -89,10 +89,10 @@ struct BasketView: View {
                         ProductsBasketView(product: product).padding()
                         Spacer()
                     }
-                    Text("Selected Time Slot: " + time_slot).font(.title3).fontWeight(.bold).foregroundColor(.black)
+                    Text("Selected Time Slot: " + time_slot).font(.title3).fontWeight(.medium).foregroundColor(.black)
                         .font(.system(.callout, design: .serif))
                         .padding()
-                    Text("Basket Total: " + String(basketInfo.basket_total) + "TL").font(.title3).fontWeight(.bold).foregroundColor(.black)
+                    Text("Basket Total: " + String(basketInfo.basket_total) + "TL").font(.title3).fontWeight(.medium).foregroundColor(.black)
                         .font(.system(.callout, design: .serif))
                         .padding()
                     
