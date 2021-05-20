@@ -15,6 +15,7 @@ let colorGray: Color = Color(UIColor.systemGray4)
 
 let sliders: [Slider] = Bundle.main.decode("slider.json")
 let categories: [Category] = Bundle.main.decode("category.json")
+let coupons: [Coupon] = Bundle.main.decode("coupon.json")
 var brands: [Brand] = Bundle.main.decode("brand.json")
 var products = [Product] ()
 var basketList = [Product] ()
