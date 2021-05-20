@@ -182,7 +182,7 @@ class Requests: ObservableObject {
                 self.getMenu(name: cafe.company_name)
                 if(!user.pending_order.isEmpty){
                     if(cafe.company_name == user.pending_order[0].cafe){
-                        if (json[String(i)]["Active Orders"][0].description == user.username){
+                        if (json[String(i)]["Active Orders"][0][0].description == user.username){
                             isOrderProcessed = true
                         }
                         else {
@@ -225,7 +225,7 @@ class Requests: ObservableObject {
             return 1
         }
         else {
-            return 1
+            return 0
         }
     }
     
