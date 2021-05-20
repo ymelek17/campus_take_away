@@ -19,7 +19,7 @@ struct BasketCafeView: View {
               .frame(width: 100, height: 100, alignment: .center)
             Spacer()
             Text(current_brand)
-              .font(.title)
+              .font(.system(size: 30, weight: .bold, design: .serif))
             .fontWeight(.bold).foregroundColor(.black)
         }).padding()
         .background(

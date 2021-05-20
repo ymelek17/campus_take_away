@@ -36,7 +36,7 @@ struct ProductsBasketView: View {
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(LinearGradient(gradient: Gradient(colors: [Color(.white), Color(.white)]), startPoint: .top, endPoint: .bottom))
-                .shadow(color: Color(.black), radius: 6, x: 3, y: 3)
+                .shadow(color: Color(.black), radius: 2, x: 3, y: 3)
           )
         .onTapGesture {
             self.showDeleteButton.toggle()
