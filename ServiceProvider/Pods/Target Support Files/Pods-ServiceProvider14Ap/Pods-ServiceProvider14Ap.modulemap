@@ -1,0 +1,6 @@
+framework module Pods_ServiceProvider14Ap {
+  umbrella header "Pods-ServiceProvider14Ap-umbrella.h"
+
+  export *
+  module * { export * }
+}
