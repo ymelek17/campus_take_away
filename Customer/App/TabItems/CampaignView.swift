@@ -9,9 +9,15 @@ import SwiftUI
 
 struct CampaignView: View {
     var body: some View {
-        Text("Campaign")
+        TabView {
+          ForEach(coupons) { coupon in 
+            CouponView(coupon: coupon)
+          }
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .padding(.vertical, 20)
+      }
     }
-}
 
 struct CampaignView_Previews: PreviewProvider {
     static var previews: some View {
