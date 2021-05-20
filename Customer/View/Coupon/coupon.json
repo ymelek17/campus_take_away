@@ -1,0 +1,22 @@
+[
+  {
+    "id" : 1,
+    "image" : "cop1",
+    "title" : "slide1"
+  },
+  {
+    "id" : 2,
+    "image" : "cop2",
+    "title" : "slide2"
+  },
+  {
+    "id" : 3,
+    "image" : "cop3",
+    "title" : "slide3"
+  },
+  {
+    "id" : 4,
+    "image" : "cop4",
+    "title" : "slide4"
+  }
+]
