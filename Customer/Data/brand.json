@@ -1,0 +1,62 @@
+[
+  {
+    "id" : 1,
+    "name" : "nero",
+    "image" : "brand1",
+    "description" : ""
+  },
+  {
+    "id" : 2,
+    "name" : "Divan Sports",
+    "image" : "brand2",
+    "description" : ""
+  },
+  {
+    "id" : 3,
+    "name" : "Divan Suzy's",
+    "image" : "brand3",
+    "description" : ""
+  },
+  {
+    "id" : 4,
+    "name" : "Espresso Lab",
+    "image" : "brand4",
+    "description" : ""
+  },
+  {
+    "id" : 5,
+    "name" : "highborn",
+    "image" : "brand3",
+    "description" : ""
+  },
+  {
+    "id" : 6,
+    "name" : "Enginar",
+    "image" : "brand3",
+    "description" : ""
+  },
+  {
+    "id" : 7,
+    "name" : "Küçük Ev",
+    "image" : "brand3",
+    "description" : ""
+  },
+  {
+    "id" : 8,
+    "name" : "Pigastro",
+    "image" : "brand3",
+    "description" : ""
+  },
+  {
+    "id" : 9,
+    "name" : "vitaminbar",
+    "image" : "brand3",
+    "description" : ""
+  },
+  {
+    "id" : 10,
+    "name" : "Lokma",
+    "image" : "brand3",
+    "description" : ""
+  }
+]
